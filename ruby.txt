@@ -1,0 +1,232 @@
+
+
+Pepita.comer_alpiste! 90
+Pepita.volar_hacia! Iruya
+Pepita.comer_alpiste! (Pepita.energia)*0.10
+
+
+module Obera
+  def self.kilometro
+    1040
+  end
+  def self.distancia_a(destino)
+  (self.kilometro - destino.kilometro).abs
+  end
+end
+
+module Iruya
+  def self.kilometro
+    1710
+  end  
+  def self.distancia_a(destino)
+  (self.kilometro - destino.kilometro).abs
+  end
+end
+
+module BuenosAires
+  def self.kilometro
+    0
+  end  
+  def self.distancia_a(destino)
+  (self.kilometro - destino.kilometro).abs
+  end
+end
+
+module Pepita
+  @energia = 1000
+  @ciudad = Obera
+  
+  def self.energia
+    @energia 
+  end
+  
+  def self.ciudad
+    @ciudad
+  end
+  
+  def self.cantar!
+    'pri pri pri'
+  end
+  
+  def self.comer_lombriz!
+    @energia += 20
+  end
+  
+  def self.volar_en_circulos!
+    @energia -= 10
+  end
+  
+  def self.volar_hacia!(destino)
+    self.gastar_energia!(destino)
+    @ciudad = destino
+  end
+  
+  def self.gastar_energia!(destino)
+    @energia -= (@ciudad.distancia_a(destino)/2)
+  end
+
+end
+
+
+module Inodoro
+  @cafeina_en_sangre = 90
+  @compinche
+  
+  def self.cafeina_en_sangre
+    @cafeina_en_sangre
+  end
+  
+  def self.compinche
+    @compinche
+  end
+  
+  def self.compinche=(compañero)
+    @compinche = compañero
+  end
+  
+  def self.tomar_mate!
+      @cafeina_en_sangre += 10
+      @compinche.recibir_mate!
+  end
+  
+end
+
+module Eulogia
+  
+  @enojada = false
+  
+  def self.enojada?
+  @enojada
+  end
+  
+  def self.recibir_mate!
+      @enojada = true
+  end
+  
+end
+
+module Mendieta
+  
+  @ganas_de_hablar = 5
+  
+  def self.ganas_de_hablar
+    @ganas_de_hablar
+  end
+  
+  def self.ganas_de_hablar=(mas_ganas_de_hablar)
+    @ganas_de_hablar = mas_ganas_de_hablar
+  end
+  
+  def self.recibir_mate!
+    @ganas_de_hablar = 0
+  end
+  
+end
+
+
+
+
+
+module Fideos
+  @ajies = 0
+  
+  def self.ajies
+    @ajies
+  end
+  
+  def self.mas_picante!(cantidad)
+    @ajies += (cantidad)
+  end
+  
+  def self.picantes?
+    @ajies > 2
+  end
+  
+  def self.menos_picante!(cantidad)
+    @ajies -= (cantidad)
+  end
+  
+  def self.descartar_la_salsa!
+    @ajies = 0
+  end
+end
+
+module Jor
+  def self.plato_del_dia=(plato)
+    @plato_del_dia=plato
+  end
+  
+  def self.picantear!
+    @plato_del_dia.mas_picante!(5)
+  end
+end
+  
+module Luchi
+  def self.suavizar!(plato, cantidad)
+    if plato.picantes?
+    if plato.ajies > 10
+      plato.descartar_la_salsa!
+    else
+      plato.menos_picante!(cantidad)
+  end
+    end
+  end
+end 
+
+
+module Juegoteca
+   @juegos =  [CarlosDuty, TimbaElLeon, Metroide]
+   
+   def self.juegos
+     @juegos
+   end
+  
+   def self.jugar_a_todo!
+       jugar_a_todo = @juegos.each {
+         | un_juego | un_juego.jugar!(5)
+         }
+   end
+  
+end
+
+
+
+
+
+class Persona
+  
+  def energia
+    @energia
+  end
+  
+  def atacar!(zombi, danio)
+    zombi.recibir_danio! danio
+  end
+
+end
+
+class Sobreviviente < Persona
+  def initialize
+    @energia = 1000
+  end
+
+  def beber!
+    @energia *= 1.25
+  end
+
+end
+
+class Aliado < Persona
+  def initialize
+    @energia = 500
+  end
+
+  def beber!
+    @energia *= 1.10
+  end
+
+  def atacar!(zombi, danio)
+    super
+    @energia *= 0.95
+  end
+end

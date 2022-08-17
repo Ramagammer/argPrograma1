@@ -1,0 +1,134 @@
+program {
+  Sacar(Rojo);
+  Sacar(Azul);
+  Sacar(Negro);
+  Sacar(Verde);
+}
+
+program {
+  Sacar(Rojo);
+  Poner(Verde);
+  Mover(Norte);
+  Sacar(Rojo);
+  Poner(Verde);
+  Mover(Este);
+  Sacar(Rojo);
+  Poner(Verde);
+  Mover(Sur);
+  Sacar(Rojo);
+  Poner(Verde);
+}
+
+
+
+procedure DibujarCuadradoColorido() {
+  DibujarLineaColorida();
+  Mover(Norte);
+  DibujarLineaColorida();
+  Mover(Norte);
+  DibujarLineaColorida();
+  Mover(Norte);
+  DibujarLineaColorida();
+}
+
+program {
+  DibujarCuadradoColorido();
+  IrAlBorde(Sur);
+  IrAlBorde(Oeste);
+}
+
+BIBLIO: 
+
+ procedure DibujarLineaColorida() {
+  PonerCeldaColorida()
+  Mover(Este)
+  PonerCeldaColorida()
+  Mover(Este)
+  PonerCeldaColorida()
+  Mover(Este)
+  PonerCeldaColorida()
+  IrAlBorde(Oeste)
+}
+
+procedure PonerCeldaColorida() {
+  Poner(Verde)
+  Poner(Rojo)
+  Poner(Negro)
+  Poner(Azul)
+}
+
+----------------------------------------
+
+procedure Mover3AlOeste() {
+  repeat(3) {
+    Mover(Oeste);
+  }
+}
+
+procedure CuadradoNegro4() {
+  repeat(3) {
+    LineaNegra4Este();
+    Mover(Norte);  
+    Mover3AlOeste();
+    }
+  LineaNegra4Este();
+}  
+  
+
+procedure Triada(azul, verde, rojo) {
+  Poner(azul);
+  Mover(Este);
+  Poner(verde);
+  Mover(Este);
+  Poner(rojo);
+}
+
+
+
+procedure PrimeraLinea(direccion) {
+  repeat(2){
+    PonerAzulejo();
+    Mover(direccion);
+  }
+  PonerAzulejo();
+  MoverN(2,opuesto(direccion));
+}
+
+procedure SegundaLinea(direccion) {
+  repeat(2){
+  Mover(direccion);
+  PonerAzulejo();
+  }
+  MoverN(2,opuesto(direccion));
+}
+
+procedure GuardaEnL(){
+  PrimeraLinea(Este);
+  SegundaLinea(Norte);
+}
+
+
+procedure SacarTodas(color) {
+  SacarN(nroBolitas(color), color);
+}
+
+
+
+procedure PrenderOApagarLuz() {
+  if (hayBolitas(Verde)) {
+    Sacar(Verde);
+    Poner(Negro);
+  } else {
+    Sacar(Negro);
+    Poner(Verde);
+  }
+}
+
+
+function hayLimite(){
+  return (estoyRodeadoDe(Rojo) || estoyEnUnBorde())
+}
+
+function estoyEnUnBorde() {
+  return (not puedeMover(Norte) || not puedeMover(Sur) || not puedeMover(Este) || not puedeMover(Oeste))
+}

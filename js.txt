@@ -1,0 +1,100 @@
+
+
+function maximo(numero1, numero2){
+  if(numero1 > numero2) {
+    return numero1;
+  } else {
+    return numero2;
+  }
+}
+
+
+function valorCantoTruco(valorTruco) {
+  if (valorTruco === "truco") {
+    return 2;
+  } else if (valorTruco === "retruco") {
+    return 3;
+  } else if (valorTruco === "vale cuatro") {
+    return 4;
+  }
+}
+
+
+function aumentarFortuna() {
+  pesosEnMiBilletera = pesosEnMiBilletera * 2;
+}
+
+
+
+
+function puedeSubirse(altura, acompañada, afeCardiaca) {
+  return ((altura >= 1.5) && !afeCardiaca && !acompañada) || ((altura >= 1.2) && !afeCardiaca && acompañada);             
+}
+
+
+function saludar(personas) {
+  for(let persona of personas) {
+    imprimir("hola" + " " + persona);
+  }
+}
+
+
+
+
+function endulzarMenu(menu) {
+  agregar(menu.postre.ingredientes, "azúcar");
+}
+
+
+
+
+function temperaturaDePlaneta(planeta) {
+  return planeta.nombre + " tiene una temperatura promedio de " + planeta.temperaturaPromedio + " grados"
+}
+
+
+function gananciaTotal(balancesDeUnPeriodo) {
+  let sumatoria = 0;
+  for (let balance of balancesDeUnPeriodo) {
+    sumatoria = sumatoria + balance.ganancia;
+  }
+  return sumatoria;
+}
+
+
+
+function agregarAPostresRapidos(lista, postre) {
+  if ((postre.tiempoDeCoccion) <= 60) {
+    agregar(lista, postre);
+  }
+
+}
+
+
+
+
+
+function meses(ciertosRegistros) {
+  let meses = [];
+  for (let mes of ciertosRegistros) {
+ agregar (meses, mes.mes);
+  }
+ return meses;
+}
+
+function afortunados(ciertosRegistros) {
+ let afortunados = [];
+  for (let balance of ciertosRegistros) {
+ if (balance.ganancia > 1000) {
+   agregar (afortunados, balance);
+  } 
+ }
+   return afortunados;
+}
+
+function mesesAfortunados(ciertosRegistros) {
+  return meses(afortunados(ciertosRegistros));
+}
+
+
+
